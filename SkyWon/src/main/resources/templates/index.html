@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/css/index.css" rel="stylesheet" type="text/css">
+
+<title>SkyWon</title>
+</head>
+
+<body>
+	<header class="ylapalkki">
+
+	<h1>[[#{app.title}]]</h1>
+	
+	<div class="col-md-4" th:if="${#authorization.expression('isAuthenticated()')}">
+			<h3 th:inline="text">[[#{h3.YouAre}]] [[${#httpServletRequest.remoteUser}]]</h3> <!-- Info viesti, jos on kirjautunut sisään -->
+	</div>
+	
+		<div class="col-md-4" style="padding:20px 0" th:if="${#authorization.expression('isAuthenticated()')}">
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out"/><!-- Kirjaudu ulos nappi -->
+			</form>
+	</div>
+		
+	<nav id="paavalikko">
+            <ul>
+                <li>[[#{menu.frontpage}]]</li>
+                <br><br>
+                <li><a href="/characterlist">[[#{menu.characterLog}]]</a></li>
+                <br><br>
+                <li class="nav-item"><a class="nav-link" th:href="@{?lang=en}">[[#{menu.langEn}]]</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{?lang=ko}">[[#{menu.langKr}]]</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+    
+        <h1>[[#{h1.frontPage}]]</h1> <!--  Welcome to SkyWon page! -->
+
+        <p>[[#{p.frontPage1}]]</p><br> <!--  If you have ID account please log in. -->
+        
+        <p>[[#{p.frontPage2}]]<br> <!-- Otherwise, feel free to check out our character list. --><br></p><br>
+        
+        <table class="table">
+		<tr>
+		    <th>[[#{th.name}]]</th>
+		    <th>[[#{th.gender}]]</th>
+		    <th>[[#{th.weapon}]]</th>
+		    <th>[[#{th.element}]]</th>
+		</tr>
+		
+    	<tr th:each = "character : ${characters}">
+    		<td th:text="${character.name}"></td>
+    		<td th:text="${character.gender}"></td>
+    		<td th:text="${character.weapon.name}"></td>
+    		<td th:text="${character.element.name}"></td>
+    		
+    	</tr>
+     </table>
+    </main>
+    
+</body>
+</html>

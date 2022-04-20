@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/css/index.css" rel="stylesheet" type="text/css">
+
+<title>Characterlist</title>
+</head>
+<body>
+
+	<header class="ylapalkki">
+	
+	<h1>[[#{h1.character}]]</h1>
+	      
+        <div class="col-md-4">
+			<h3 th:inline="text">[[#{h3.Welcome}]] [[${#httpServletRequest.remoteUser}]]</h3> <!-- Tervetuloa viesti -->
+		</div>
+		
+		<div class="col-md-4" style="padding:20px 0">
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out"/> <!-- Kirjaudu ulos nappi -->
+			</form>
+		</div>
+	
+	<nav id="paavalikko">
+            <ul>
+                <li><a href="/index">[[#{menu.frontpage}]]</a></li>
+                <li>[[#{menu.character}]]</li>
+                <br>
+                <li><a href="/elementlist">[[#{menu.element}]]</a></li>
+                <li><a href="/weaponlist">[[#{menu.weapon}]]</a></li>
+                <br><br>
+                <li><a href="/addcharacter">[[#{menu.addcharacter}]]</a></li>
+                <li><a href="/addelement">[[#{menu.addelement}]]</a></li>
+                <li><a href="/addweapon">[[#{menu.addweapon}]]</a></li>
+                <br><br>
+                <li class="nav-item"><a class="nav-link" th:href="@{?lang=en}">[[#{menu.langEn}]]</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{?lang=ko}">[[#{menu.langKr}]]</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+   	<main>
+    <table class="table">
+		<tr>
+		    <th>[[#{th.name}]]</th>
+		    <th>[[#{th.gender}]]</th>
+		    <th>[[#{th.weapon}]]</th>
+		    <th>[[#{th.element}]]</th>  
+		    <th></th>
+		    <th></th>
+		</tr>
+		
+    	<tr th:each = "character : ${characters}">
+    		<td th:text="${character.name}"></td>
+    		<td th:text="${character.gender}"></td>
+    		<td th:text="${character.weapon.name}"></td>
+    		<td th:text="${character.element.name}"></td>
+            
+            <!--  Vain ADMIN voi poistaa -->
+    		<!--  Delete painike on piiloitettu -->
+    		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${character.id})}">[[#{delete}]]</a></td>
+    		<td><a th:href="@{/editcharacter/{id}(id=${character.id})}">[[#{edit}]]</a></td>
+    		
+    	</tr>
+     </table>
+     </main>
+
+</body>
+</html>

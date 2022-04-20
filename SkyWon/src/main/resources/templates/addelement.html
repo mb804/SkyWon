@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/css/index.css" rel="stylesheet" type="text/css">
+
+<title>Add element</title>
+</head>
+<body>
+
+	<header class="ylapalkki">
+
+	<h1>[[#{h1.AddEle}]]</h1>
+	
+	<div class="col-md-4" th:if="${#authorization.expression('isAuthenticated()')}">
+			<h3 th:inline="text">[[#{h3.YouAre}]] [[${#httpServletRequest.remoteUser}]]</h3> <!-- Info viesti, jos on kirjautunut sisään -->
+	</div>
+
+	</header>
+
+	<main>
+	<div>
+	<br>
+		<form th:object="${element}" th:action="@{/saveElement}" action="#" method="post">
+		
+		  	<label for="name">[[#{add.name}]]</label>
+			<input type="text" id="name" th:field="*{name}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<input type="submit" value="Save"></input>
+			<br><br>
+		</form>
+	</div>
+	</main>
+
+</body>
+</html>

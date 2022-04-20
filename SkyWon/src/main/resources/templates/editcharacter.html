@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/css/index.css" rel="stylesheet" type="text/css">
+
+<title>Edit character</title>
+</head>
+<body>
+
+	<header class="ylapalkki">
+	
+	<h1>[[#{h1.EditCha}]]</h1>
+	
+	<div class="col-md-4" th:if="${#authorization.expression('isAuthenticated()')}">
+			<h3 th:inline="text">[[#{h3.YouAre}]] [[${#httpServletRequest.remoteUser}]]</h3> <!-- Info viesti, jos on kirjautunut sisään -->
+	</div>
+	
+	</header>
+	
+	<main>
+	<div>
+	<br>
+		<form th:object="${character}" th:action="@{/save}" action="#" method="post">
+		
+			<label for="id">[[#{edit.id}]]</label>
+			<input type="text" id="id" th:field="*{id}" readonly="readonly"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+		  	<label for="name">[[#{edit.name}]]</label>
+			<input type="text" id="name" th:field="*{name}"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+		  	<label for="gender">[[#{edit.gender}]]</label>
+			<input type="text" id="gender" th:field="*{gender}"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="weaponlist">[[#{edit.weapon}]]</label>
+			<select id="weaponlist" th:field="*{weapon}" class="form-control">
+			<option th:each="weapon: ${weapons}" th:value="${weapon.weaponid}" th:text="${weapon.name}"></option>
+			</select>
+			&nbsp;
+			<label for="elementlist">[[#{edit.element}]]</label>
+			<select id="elementlist" th:field="*{element}" class="form-control">
+			<option th:each="element: ${elements}" th:value="${element.elementid}" th:text="${element.name}"></option>
+			</select>
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Save"></input>
+			<br><br>
+		</form>
+	</div>
+	</main>
+
+</body>
+</html>

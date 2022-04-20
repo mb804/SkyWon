@@ -1,0 +1,129 @@
+header h1 {
+    font-family: Arial;
+    color: #eaffff;
+    text-align: center;
+
+}
+
+header h3 {
+	font-family: Arial;
+    color: #eaffff;
+    text-align: center;
+}
+
+/* ylapalkki */
+.ylapalkki {
+    text-align: center;
+    color: #491450;
+}
+
+/* log in */
+#login {
+    border: 1px solid #0000;
+}
+
+#paavalikko a {
+    color: #1d3f41;
+    text-decoration: none
+}
+
+.table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+td, th {
+	border-bottom: 1px solid #ddd;
+	padding: 15px;
+	text-align: center;
+	
+}
+
+th {
+  background-image: url(tausta1.jpg);
+  color: white;
+}
+
+table {
+	border-collapse: collapse;
+	width: 50%;
+	text-align: center;
+}
+
+a th {
+	float: left;
+ 	border: 1px solid green;
+}
+
+body {
+    background-image: url(tausta5.jpg)
+}
+
+main h1 {
+    text-align: center;
+    color: #557ea2;
+    font-family: New Times Roman;
+}
+
+main p {
+    text-align: center;
+
+}
+
+main {
+    padding: 10px;
+    border: solid 2px #a7a7c9;
+    background: white;
+    margin-top: 5%;
+    margin-left: 30%;
+    margin-right: 30%;
+    border-radius: 20px;
+    text-align: center;
+}
+
+/* *** screen <412*** */
+@media only screen and (max-width: 412px) {
+    header {
+        display: flex;
+        flex-direction: column-reverse
+    }
+
+    nav li {
+        list-style-type: none;
+        text-align: left;
+    }
+
+    nav ul {
+        padding-left: 10px
+    }
+
+}
+
+/* *** screen >413px *** */
+@media only screen and (min-width: 413px) {
+    nav ul {
+        padding-left: 0px
+    }
+
+    nav li {
+        display: inline-block;
+        margin: 2px 1px;
+        border: solid 1px gray;
+        padding: 3px;
+        width: 9em;
+        background: white
+    }
+
+    .flex_container {
+        display: block;
+    }
+
+    .flex_item {
+        flex: 1px;
+        padding-right: 5px;
+        padding-left: 5px
+    }
+}
+
+/* *** > 768px *** */
+@media only screen and (min-width: 768px) {}
